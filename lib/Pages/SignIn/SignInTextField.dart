@@ -1,18 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:group_todo/Style/AppColors.dart';
+import 'package:group_todo/Common/VisibilityIconButton.dart';
 
 // This class is the textfields of users' email and password.
-// This class is a stateful widget, and it manages its own state, which means that
-// the SignInPage widget doen't need to worry about the inner state (text inside the textfields)
+// The SignInPage widget doen't need to worry about the inner state (text inside the textfields)
 // of this widget.
 
-class SignInTextField extends StatelessWidget {
+class SignInTextField extends StatefulWidget {
+  // Two callbacks when text in email or password textfields changes
+  final ValueChanged<String> onEmailChanged;
+  final ValueChanged<String> onPasswordChanged;
 
   SignInTextField(this.onEmailChanged, this.onPasswordChanged);
 
-  final Function onEmailChanged;
-  final Function onPasswordChanged;
+  _SignInTextFieldState createState() => _SignInTextFieldState();
+}
+
+class _SignInTextFieldState extends State<SignInTextField> {
+
+  var _passwordSecured = true;
 
   // Decoration used for the two textfields
   final _boxDecoration = BoxDecoration(
@@ -33,13 +40,14 @@ class SignInTextField extends StatelessWidget {
     color: AppColors.DarkColor,
   );
   // Paddings used for text in the textfields
-  final _textPadding = EdgeInsets.only(left: 32, right:32, top: 16, bottom: 16);
+  final _textPadding = EdgeInsets.only(left: 24, right:24, top: 16, bottom: 16);
 
   @override
   Widget build(BuildContext context) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget> [
+
           // Textfield Section
           Expanded(
             child: Container(
@@ -47,12 +55,13 @@ class SignInTextField extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+
                   // Email textfield
                   CupertinoTextField(
                     padding: _textPadding,
                     placeholder: "Email Address",
                     placeholderStyle: _textStyle,
-                    onChanged: onEmailChanged,
+                    onChanged: widget.onEmailChanged,
                     keyboardType: TextInputType.emailAddress,
                     decoration: _boxDecoration,
                     style: _textStyle,
@@ -63,11 +72,18 @@ class SignInTextField extends StatelessWidget {
                     padding: _textPadding,
                     placeholder: "Password",
                     placeholderStyle: _textStyle,
-                    onChanged: onPasswordChanged,
+                    onChanged: widget.onPasswordChanged,
                     keyboardType: TextInputType.text,
-                    obscureText: true,
+                    obscureText: _passwordSecured,
                     decoration: _boxDecoration,
                     style: _textStyle,
+                    suffix: VisibilityIconButton(
+                      onSetInvisible: _onSetPasswordInvisible,
+                      onSetVisible: _onSetPasswordVisible,
+                      color: AppColors.DarkColor,
+                      iconSize: 24,
+                      initialVisibility: _passwordSecured,
+                    ),
                   ),
                 ]
               )
@@ -82,5 +98,17 @@ class SignInTextField extends StatelessWidget {
           )
         ]
     );
+  }
+
+  void _onSetPasswordVisible() {
+    setState(() {
+      _passwordSecured = true;
+    });
+  }
+
+  void _onSetPasswordInvisible() {
+    setState(() {
+      _passwordSecured = false;
+    });
   }
 }

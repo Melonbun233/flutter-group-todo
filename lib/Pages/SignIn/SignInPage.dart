@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:group_todo/Style/AppColors.dart';
 import 'SignInTextField.dart';
 
-class SignInPage extends StatefulWidget {
-  @override
-  _SignInPageState createState() => _SignInPageState();
-}
 
-class _SignInPageState extends State<SignInPage> {
+class SignInPage extends StatelessWidget {
   String email;
   String password;
 
@@ -66,16 +62,12 @@ class _SignInPageState extends State<SignInPage> {
   );
 
   void _onEmailChanged(String email) {
-    setState(() {
-      this.email = email;
-      print("Email changed to: $email");
-    });
+    this.email = email;
+    print("Email changed to: $email");
   }
 
   void _onPasswordChanged(String password) {
-    setState(() {
       this.password = password;
       print("Password changed to: $password");
-    });
   }
 }
