@@ -1,29 +1,35 @@
 import 'package:flutter/cupertino.dart';
-import 'Screens/HomePage.dart';
-import 'Screens/LogInPage.dart';
+import 'Pages/Home/HomePage.dart';
+import 'Pages/SignIn/SignInPage.dart';
+import 'Style/AppThemes.dart';
 
 // The entry point of this app
 void main() => runApp(GroupTodo());
 
+// GroupTodo class is the root widget of the app
 class GroupTodo extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
 
     // Choose Cupertino to build a ios-style app
     return CupertinoApp(
+      // The name of this app
       title: 'Group Todo',
 
-      // The first screen when entering the app
-      // Currently login screen is just UI (not really logging you in)
-      initialRoute: LogInPage.routeName,
+      // The theme defined in AppThemes.dart
+      theme: LightTheme,
 
+      // The first screen when entering the app
+      initialRoute: '/SignIn',
       // All routes used by the app
       // When navigating to one of them, build the corresponding screen widget
       // Those widgets are defined in screens/
       routes: {
-        LogInPage.routeName: (context) => LogInPage(),
-        HomePage.routeName: (context) => HomePage(),
+        // The main navigator for this app, contains most of the user tasks
+        '/': (context) => HomePage(),
+
+        // Sign in page contains another navigator for the process of signin/signup
+        '/SignIn': (context) => SignInPage(),
       },
     );
   }
