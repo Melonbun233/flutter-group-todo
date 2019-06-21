@@ -1,16 +1,29 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:group_todo/Style/AppColors.dart';
+import 'SignInTextField.dart';
 
-class SignInPage extends StatelessWidget {
-  
+class SignInPage extends StatefulWidget {
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return 
     CupertinoPageScaffold(
       child: Column(
         children: <Widget>[
-          Expanded(child: _titleSection),
-          Expanded(child: Placeholder())
+          // Title Section
+          Expanded(flex: 1, child: _titleSection),
+          // Textfield Section
+          Expanded(flex: 1, child: SignInTextField(_onEmailChanged, _onPasswordChanged)),
+          // Button Section
+          Expanded(flex: 2, child: Placeholder(strokeWidth: 0)),
         ],
       )
     );
@@ -32,6 +45,8 @@ class SignInPage extends StatelessWidget {
             "GROUP", 
             style: TextStyle(
               fontSize: 30,
+              fontWeight: FontWeight.w400,
+              color: Colors.white
             )
           )
         ),
@@ -40,7 +55,9 @@ class SignInPage extends StatelessWidget {
           child: Text(
             "TODO",
             style: TextStyle(
-              fontSize: 30
+              fontSize: 30,
+              fontWeight: FontWeight.w400,
+              color: AppColors.LightColor
             )
           )
         )
@@ -48,4 +65,17 @@ class SignInPage extends StatelessWidget {
     ),
   );
 
+  void _onEmailChanged(String email) {
+    setState(() {
+      this.email = email;
+      print("Email changed to: $email");
+    });
+  }
+
+  void _onPasswordChanged(String password) {
+    setState(() {
+      this.password = password;
+      print("Password changed to: $password");
+    });
+  }
 }

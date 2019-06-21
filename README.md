@@ -2,7 +2,7 @@
 This is a flutter project for learning purpose, and it's still under development.  
 This application is a todo-list app that helps users record their daily tasks running on iOS platform 
 (maybe we will add Android platform in the future).  
-A interesting feature of this app is that people can send invitations and share lists with other
+An interesting feature of this app is that people can send invitations and share lists with other
 users.  
 
 ## Why
