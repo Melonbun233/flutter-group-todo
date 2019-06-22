@@ -24,6 +24,7 @@ class _VisibilityIconButtonState extends State<VisibilityIconButton> {
 
   bool _visible;
 
+  // Construct the state with initial visibility
   _VisibilityIconButtonState(this._visible);
 
   @override

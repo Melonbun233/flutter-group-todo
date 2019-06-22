@@ -7,17 +7,17 @@ import 'package:group_todo/Common/VisibilityIconButton.dart';
 // The SignInPage widget doen't need to worry about the inner state (text inside the textfields)
 // of this widget.
 
-class SignInTextField extends StatefulWidget {
+class SignInTextFieldSection extends StatefulWidget {
   // Two callbacks when text in email or password textfields changes
   final ValueChanged<String> onEmailChanged;
   final ValueChanged<String> onPasswordChanged;
 
-  SignInTextField(this.onEmailChanged, this.onPasswordChanged);
+  SignInTextFieldSection(this.onEmailChanged, this.onPasswordChanged);
 
-  _SignInTextFieldState createState() => _SignInTextFieldState();
+  _SignInTextFieldSectionState createState() => _SignInTextFieldSectionState();
 }
 
-class _SignInTextFieldState extends State<SignInTextField> {
+class _SignInTextFieldSectionState extends State<SignInTextFieldSection> {
 
   var _passwordSecured = true;
 
@@ -82,7 +82,9 @@ class _SignInTextFieldState extends State<SignInTextField> {
                       onSetVisible: _onSetPasswordVisible,
                       color: AppColors.DarkColor,
                       iconSize: 24,
-                      initialVisibility: _passwordSecured,
+                      // secured password indicates invisibility, so initial visibility
+                      // is set to false if secured password is set to true
+                      initialVisibility: !_passwordSecured,
                     ),
                   ),
                 ]
@@ -100,12 +102,14 @@ class _SignInTextFieldState extends State<SignInTextField> {
     );
   }
 
+  // When password becomes visible indicates the password is insecured
   void _onSetPasswordVisible() {
     setState(() {
-      _passwordSecured = true;
+      _passwordSecured = false;
     });
   }
 
+  // When password becomes invisible indicates the password is secured
   void _onSetPasswordInvisible() {
     setState(() {
       _passwordSecured = false;

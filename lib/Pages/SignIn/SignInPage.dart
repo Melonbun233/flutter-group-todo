@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:group_todo/Style/AppColors.dart';
-import 'SignInTextField.dart';
 
+import 'SignInTextFieldSection.dart';
+import 'SignInTitleSection.dart';
 
+// This is a page widget for sign in page, this widget controlls related sign in data and it's subsections.
+// The SignInPage is stateless so that it doesn't need to rebuild the whole page when some
+// data are changed. Instead, it only rebuilds its subsections when necessary.
 class SignInPage extends StatelessWidget {
   String email;
   String password;
@@ -15,9 +18,9 @@ class SignInPage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           // Title Section
-          Expanded(flex: 1, child: _titleSection),
+          Expanded(flex: 1, child: SignInTitleSection()),
           // Textfield Section
-          Expanded(flex: 1, child: SignInTextField(_onEmailChanged, _onPasswordChanged)),
+          Expanded(flex: 1, child: SignInTextFieldSection(_onEmailChanged, _onPasswordChanged)),
           // Button Section
           Expanded(flex: 2, child: Placeholder(strokeWidth: 0)),
         ],
@@ -25,41 +28,6 @@ class SignInPage extends StatelessWidget {
     );
     
   }
-
-  // Title section widget
-  final _titleSection = Container(
-    padding: const EdgeInsets.only(bottom: 24.0),
-    color: AppColors.DarkColor,
-    alignment: Alignment.bottomCenter,
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.only(right: 4.0),
-          child: Text(
-            "GROUP", 
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w400,
-              color: Colors.white
-            )
-          )
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: Text(
-            "TODO",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w400,
-              color: AppColors.LightColor
-            )
-          )
-        )
-      ],
-    ),
-  );
 
   void _onEmailChanged(String email) {
     this.email = email;
