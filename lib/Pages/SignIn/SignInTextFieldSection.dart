@@ -35,7 +35,7 @@ class _SignInTextFieldSectionState extends State<SignInTextFieldSection> {
 
   // Text style used for placeholders and text in the textfields
   final _textStyle = TextStyle(
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: FontWeight.normal,
     color: AppColors.DarkColor,
   );

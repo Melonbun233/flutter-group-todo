@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:group_todo/Style/AppColors.dart';
+import 'package:group_todo/Style/AppTextStyles.dart';
 // This class constructs a title section for sign in page
 // This section is a stateless widget
 
@@ -12,6 +13,9 @@ class SignInTitleSection extends StatelessWidget {
   final Color mainTitleColor;
   // Color of the text "TODO" 
   final Color subTitleColor;
+
+  // Title font size
+  final double titleFontSize = AppTextStyles.h1.fontSize;
 
   SignInTitleSection({this.backgroundColor: AppColors.DarkColor, 
     this.mainTitleColor: Colors.white, this.subTitleColor: AppColors.LightColor});
@@ -31,7 +35,7 @@ class SignInTitleSection extends StatelessWidget {
             child: Text(
               "GROUP", 
               style: TextStyle(
-                fontSize: 30,
+                fontSize: titleFontSize,
                 fontWeight: FontWeight.w400,
                 color: mainTitleColor
               )
@@ -42,7 +46,7 @@ class SignInTitleSection extends StatelessWidget {
             child: Text(
               "TODO",
               style: TextStyle(
-                fontSize: 30,
+                fontSize: titleFontSize,
                 fontWeight: FontWeight.w400,
                 color: subTitleColor
               )
