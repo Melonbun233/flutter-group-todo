@@ -1,25 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:group_todo/Style/AppColors.dart';
-import 'package:group_todo/Common/VisibilityIconButton.dart';
+import 'package:group_todo/core/ViewModels/SignInViewModel.dart';
+import 'package:group_todo/ui/Styles/AppColors.dart';
+import 'package:group_todo/ui/Shared/VisibilityIconButton.dart';
 
 // This class is the textfields of users' email and password.
 // The SignInPage widget doen't need to worry about the inner state (text inside the textfields)
 // of this widget.
 
-class SignInTextFieldSection extends StatefulWidget {
-  // Two callbacks when text in email or password textfields changes
-  final ValueChanged<String> onEmailChanged;
-  final ValueChanged<String> onPasswordChanged;
+class SignInTextFieldSection extends StatelessWidget {
+  // view model of SignInPage
+  final SignInViewModel model;
 
-  SignInTextFieldSection(this.onEmailChanged, this.onPasswordChanged);
-
-  _SignInTextFieldSectionState createState() => _SignInTextFieldSectionState();
-}
-
-class _SignInTextFieldSectionState extends State<SignInTextFieldSection> {
-
-  var _passwordSecured = true;
+  SignInTextFieldSection(this.model);
 
   // Decoration used for the two textfields
   final _boxDecoration = BoxDecoration(
@@ -61,7 +54,7 @@ class _SignInTextFieldSectionState extends State<SignInTextFieldSection> {
                     padding: _textPadding,
                     placeholder: "Email Address",
                     placeholderStyle: _textStyle,
-                    onChanged: widget.onEmailChanged,
+                    onChanged: model.onEmailChanged,
                     keyboardType: TextInputType.emailAddress,
                     decoration: _boxDecoration,
                     style: _textStyle,
@@ -72,19 +65,19 @@ class _SignInTextFieldSectionState extends State<SignInTextFieldSection> {
                     padding: _textPadding,
                     placeholder: "Password",
                     placeholderStyle: _textStyle,
-                    onChanged: widget.onPasswordChanged,
+                    onChanged: model.onPasswordChanged,
                     keyboardType: TextInputType.text,
-                    obscureText: _passwordSecured,
+                    obscureText: model.passwordSecured,
                     decoration: _boxDecoration,
                     style: _textStyle,
                     suffix: VisibilityIconButton(
-                      onSetInvisible: _onSetPasswordInvisible,
-                      onSetVisible: _onSetPasswordVisible,
+                      onSetInvisible: model.onSetPasswordInvisible,
+                      onSetVisible: model.onSetPasswordVisible,
                       color: AppColors.DarkColor,
                       iconSize: 24,
                       // secured password indicates invisibility, so initial visibility
                       // is set to false if secured password is set to true
-                      initialVisibility: !_passwordSecured,
+                      initialVisibility: !model.passwordSecured,
                     ),
                   ),
                 ]
@@ -100,19 +93,5 @@ class _SignInTextFieldSectionState extends State<SignInTextFieldSection> {
           )
         ]
     );
-  }
-
-  // When password becomes visible indicates the password is insecured
-  void _onSetPasswordVisible() {
-    setState(() {
-      _passwordSecured = false;
-    });
-  }
-
-  // When password becomes invisible indicates the password is secured
-  void _onSetPasswordInvisible() {
-    setState(() {
-      _passwordSecured = false;
-    });
   }
 }

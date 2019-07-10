@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:group_todo/Style/AppColors.dart';
-import 'package:group_todo/Style/AppTextStyles.dart';
+import 'package:group_todo/ui/Styles/AppColors.dart';
+import 'package:group_todo/ui/Styles/AppTextStyles.dart';
 // This class constructs a title section for sign in page
 // This section is a stateless widget
 

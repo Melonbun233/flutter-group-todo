@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'Pages/Home/HomePage.dart';
-import 'Pages/SignIn/SignInPage.dart';
-import 'Style/AppThemes.dart';
+import 'package:group_todo/core/Services/Locator.dart';
+import 'package:group_todo/core/Services/Router.dart' as router;
+import 'package:group_todo/ui/Styles/AppThemes.dart';
 
-// The entry point of this app
-void main() => runApp(GroupTodo());
+
+void main() {
+  // Service locator setup
+  setupLocator();
+  // App entry point
+  runApp(GroupTodo());
+}
 
 // GroupTodo class is the root widget of the app
 class GroupTodo extends StatelessWidget {
@@ -19,18 +24,12 @@ class GroupTodo extends StatelessWidget {
       // The theme defined in AppThemes.dart
       theme: LightTheme,
 
-      // The first screen when entering the app
-      initialRoute: '/SignIn',
-      // All routes used by the app
-      // When navigating to one of them, build the corresponding screen widget
-      // Those widgets are defined in screens/
-      routes: {
-        // The main navigator for this app, contains most of the user tasks
-        '/': (context) => HomePage(),
+      // All routes are defined in router
+      // generateRoute handles which routes to go to
+      onGenerateRoute: router.generateRoute,
 
-        // Sign in page contains another navigator for the process of signin/signup
-        '/SignIn': (context) => SignInPage(),
-      },
+      // The first screen when entering the app
+      initialRoute: router.SignInRoute,
     );
   }
 }

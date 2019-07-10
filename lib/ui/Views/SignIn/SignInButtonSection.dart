@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:group_todo/Style/AppColors.dart';
-import 'package:group_todo/Style/AppTextStyles.dart';
+import 'package:group_todo/core/ViewModels/SignInViewModel.dart';
+import 'package:group_todo/ui/Styles/AppColors.dart';
+import 'package:group_todo/ui/Styles/AppTextStyles.dart';
 
 
 // This class constructs the button section of Sign In Page.
@@ -10,21 +11,29 @@ import 'package:group_todo/Style/AppTextStyles.dart';
 
 class SignInButtonSection extends StatelessWidget {
 
+  // SignInViewModel
+  final SignInViewModel model;
+
   // 4 callbacks for the buttons' onPressed callback
   // Those callbacks are default set to null if no function is provided
   final VoidCallback onSignInButtonPressed;
   final VoidCallback onGoogleSignInButtonPressed;
   final VoidCallback onSignUpButtonPressed;
-  final VoidCallback onSkipButtonPresesd;
+  //final VoidCallback onSkipButtonPresesd;
 
   // Border radius used for the bordered buttons
   final BorderRadius buttonRadius = const BorderRadius.all(Radius.circular(24));
   // Button height
   final double buttonHeight = 50;
+  // Button pressed opacity. Buttons will have opacity of 1.0 when not pressed
+  final double buttonPressedOpacity = 0.6;
 
 
-  SignInButtonSection({this.onSignInButtonPressed, this.onGoogleSignInButtonPressed,
-    this.onSignUpButtonPressed, this.onSkipButtonPresesd});
+  SignInButtonSection(this.model):
+    this.onSignInButtonPressed = model.onSignInButtonPressed,
+    this.onGoogleSignInButtonPressed = model.onGoogleSignInButtonPressed,
+    this.onSignUpButtonPressed = model.onSignUpButtonPressed;
+
 
   @override 
   Widget build(BuildContext context) {
@@ -45,7 +54,7 @@ class SignInButtonSection extends StatelessWidget {
           )),
 
           // Column for the skip button, it resides at the bottom of the page
-          Expanded (flex: 1, child: _buildSkipButton())
+          Expanded (flex: 1, child: _buildSkipButton(context: context))
         ],
       )
     );
@@ -53,7 +62,7 @@ class SignInButtonSection extends StatelessWidget {
     
   }
 
-  Widget _buildSignInButton() {
+  Widget _buildSignInButton({BuildContext context}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -61,6 +70,7 @@ class SignInButtonSection extends StatelessWidget {
           child: Container(
             height: buttonHeight,
             child: CupertinoButton.filled(
+              pressedOpacity: buttonPressedOpacity,
               onPressed: onSignInButtonPressed,
               borderRadius: buttonRadius,
               child: Text(
@@ -78,7 +88,7 @@ class SignInButtonSection extends StatelessWidget {
     );
   }
 
-  Widget _buildGoogleSignInButton() {
+  Widget _buildGoogleSignInButton({BuildContext context}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -93,6 +103,7 @@ class SignInButtonSection extends StatelessWidget {
               )
             ),
             child: CupertinoButton(
+              pressedOpacity: buttonPressedOpacity,
               onPressed: onGoogleSignInButtonPressed,
               borderRadius: buttonRadius,
               child: Text(
@@ -110,11 +121,12 @@ class SignInButtonSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSignUpButton() {
+  Widget _buildSignUpButton({BuildContext context}) {
     return Container(
       alignment: Alignment.topCenter,
       child: Container(
-        child: CupertinoButton( 
+        child: CupertinoButton(
+          pressedOpacity: buttonPressedOpacity,
           onPressed: onSignUpButtonPressed,
           borderRadius: buttonRadius,
           child: Text( 
@@ -130,12 +142,13 @@ class SignInButtonSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSkipButton() {
+  Widget _buildSkipButton({BuildContext context}) {
     return Container(
       alignment: Alignment.bottomRight,
       child: Container(
         child: CupertinoButton(
-          onPressed: onSkipButtonPresesd,
+          pressedOpacity: buttonPressedOpacity,
+          onPressed: () => model.onSkipButtonPressed(context),
           child: Text(
             "Skip",
             style: TextStyle(
@@ -148,5 +161,4 @@ class SignInButtonSection extends StatelessWidget {
       )
     );
   }
-  
 }
