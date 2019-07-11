@@ -3,8 +3,9 @@ import 'package:uuid/uuid.dart';
 
 class Todo {
 
-  String name;
   final String uuid;
+  
+  String name;
   String description;
   DateTime deadline;
   Duration repeat;

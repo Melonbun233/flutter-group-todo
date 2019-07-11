@@ -1,7 +1,7 @@
 // This is the ViewModel for SignInPage which you can find in lib/ui/Views/SignIn/
 import 'package:flutter/material.dart';
 import 'package:group_todo/core/ViewModels/BaseViewModel.dart';
-import 'package:group_todo/core/Services/Router.dart' as router;
+import 'package:group_todo/core/Router.dart' as router;
 import 'package:group_todo/core/ViewState.dart';
 
 class SignInViewModel extends BaseViewModel {
