@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:group_todo/core/Services/Locator.dart';
 import 'package:group_todo/core/ViewModels/SignInViewModel.dart';
-import 'package:provider/provider.dart';
+import 'package:group_todo/ui/Views/BaseView.dart';
 
 import 'SignInTextFieldSection.dart';
 import 'SignInTitleSection.dart';
@@ -16,20 +15,17 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ChangeNotifierProvider<SignInViewModel>(
-      builder: (context) => locator<SignInViewModel>(),
-      child: Consumer<SignInViewModel>(
-        builder: (context, model, child) => CupertinoPageScaffold(
-          child: Column(
-            children: <Widget>[
-              // Title Section
-              Expanded(flex: 1, child: SignInTitleSection()),
-              // Textfield Section
-              Expanded(flex: 1, child: SignInTextFieldSection(model)),
-              // Button Section
-              Expanded(flex: 2, child: SignInButtonSection(model)),
-            ],
-          )
+    return BaseView<SignInViewModel>(
+      builder: (context, model, child) => CupertinoPageScaffold(
+        child: Column(
+          children: <Widget>[
+            // Title Section
+            Expanded(flex: 1, child: SignInTitleSection()),
+            // Textfield Section
+            Expanded(flex: 1, child: SignInTextFieldSection(model)),
+            // Button Section
+            Expanded(flex: 2, child: SignInButtonSection(model)),
+          ],
         )
       )
     );

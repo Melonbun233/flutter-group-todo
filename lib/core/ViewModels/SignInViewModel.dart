@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:group_todo/core/ViewModels/BaseViewModel.dart';
 import 'package:group_todo/core/Services/Router.dart' as router;
-import 'package:group_todo/core/ViewModels/ViewState.dart';
+import 'package:group_todo/core/ViewState.dart';
 
 class SignInViewModel extends BaseViewModel {
   bool passwordSecured = true;

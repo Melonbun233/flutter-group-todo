@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:group_todo/core/Services/Locator.dart';
+import 'package:group_todo/core/Locator.dart';
 import 'package:group_todo/core/Services/Router.dart' as router;
 import 'package:group_todo/ui/Styles/AppThemes.dart';
 

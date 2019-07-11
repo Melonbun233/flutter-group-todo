@@ -1,6 +1,6 @@
 // This view model is used for all other view models to extend
 import 'package:flutter/cupertino.dart';
-import 'package:group_todo/core/ViewModels/ViewState.dart';
+import 'package:group_todo/core/ViewState.dart';
 
 class BaseViewModel extends ChangeNotifier {
   // Each view model should have a state

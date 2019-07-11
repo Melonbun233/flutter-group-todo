@@ -36,6 +36,7 @@ class _VisibilityIconButtonState extends State<VisibilityIconButton> {
         iconSize: widget.iconSize,
         color: widget.color,
         splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         icon: _visible ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
         onPressed: _onIconButtonPressed
       )
